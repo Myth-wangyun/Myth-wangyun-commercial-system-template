@@ -1,0 +1,13 @@
+.pressure-interview-table .pressure-score-fail {
+  background: #fff5f5 !important;
+  border-color: #e03131 !important;
+}
+
+.pressure-interview-table .pressure-score-fail.ant-input-number-focused,
+.pressure-interview-table .pressure-score-fail:focus-within {
+  box-shadow: 0 0 0 2px rgba(224, 49, 49, 0.2);
+}
+
+.pressure-interview-table .pressure-score-fail .ant-input-number-input {
+  color: #c92a2a;
+}

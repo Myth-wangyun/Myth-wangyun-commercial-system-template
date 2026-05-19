@@ -1,0 +1,104 @@
+.m-home {
+  padding: 0;
+  background: #f5f5f5;
+  min-height: 100%;
+}
+
+/* 欢迎横幅 */
+.m-home-banner {
+  background: linear-gradient(135deg, #1677ff 0%, #4096ff 50%, #69b1ff 100%);
+  padding: 24px 16px 28px;
+  border-radius: 0 0 20px 20px;
+}
+
+.m-home-greeting {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+/* 分区标题 */
+.m-home-section {
+  padding: 16px;
+}
+
+.m-home-section-title {
+  font-size: 15px;
+  font-weight: 600;
+  color: #333;
+  margin-bottom: 12px;
+}
+
+/* 快捷操作网格 - 3列 */
+.m-home-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr;
+  gap: 10px;
+}
+
+.m-home-action-card {
+  background: #fff;
+  border-radius: 12px;
+  padding: 14px 10px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  gap: 6px;
+  box-shadow: 0 1px 4px rgba(0, 0, 0, 0.06);
+  cursor: pointer;
+  transition: transform 0.15s, box-shadow 0.15s;
+  position: relative;
+  overflow: hidden;
+}
+
+.m-home-action-card:active:not(.disabled) {
+  transform: scale(0.97);
+  box-shadow: 0 1px 2px rgba(0, 0, 0, 0.1);
+}
+
+.m-home-action-card.disabled {
+  opacity: 0.6;
+  cursor: default;
+}
+
+.m-home-action-icon {
+  width: 36px;
+  height: 36px;
+  border-radius: 10px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #fff;
+  font-size: 18px;
+}
+
+.m-home-action-title {
+  font-size: 13px;
+  font-weight: 600;
+  color: #333;
+}
+
+.m-home-action-desc {
+  font-size: 11px;
+  color: #999;
+  line-height: 1.3;
+}
+
+.m-home-coming-soon {
+  position: absolute;
+  top: 8px;
+  right: -22px;
+  background: #ff4d4f;
+  color: #fff;
+  font-size: 10px;
+  padding: 2px 24px;
+  transform: rotate(45deg);
+}
+
+/* 公告卡片 */
+.m-home-notice-card {
+  border-radius: 10px !important;
+  border: none !important;
+  box-shadow: 0 1px 4px rgba(0, 0, 0, 0.06);
+}

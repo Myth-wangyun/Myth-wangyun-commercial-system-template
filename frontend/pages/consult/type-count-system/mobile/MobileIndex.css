@@ -1,0 +1,48 @@
+.m-tcs-page {
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+}
+
+.m-tcs-tabs {
+  display: flex;
+  background: #fff;
+  border-bottom: 1px solid #f0f0f0;
+  position: sticky;
+  top: 0;
+  z-index: 10;
+}
+
+.m-tcs-tab {
+  flex: 1;
+  text-align: center;
+  padding: 10px 0;
+  font-size: 15px;
+  color: #666;
+  position: relative;
+  cursor: pointer;
+  transition: color 0.2s;
+}
+
+.m-tcs-tab.active {
+  color: #1677ff;
+  font-weight: 600;
+}
+
+.m-tcs-tab.active::after {
+  content: '';
+  position: absolute;
+  bottom: 0;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 40px;
+  height: 3px;
+  background: #1677ff;
+  border-radius: 2px;
+}
+
+.m-tcs-content {
+  flex: 1;
+  overflow-y: auto;
+  -webkit-overflow-scrolling: touch;
+}

@@ -1,0 +1,111 @@
+
+/* ====== Dashboard 全局美化 ====== */
+.dashboard-table {
+  background: #fff !important;
+  border-radius: 12px !important;
+  box-shadow: 0 2px 16px 0 rgba(0,0,0,0.06), 0 1.5px 4px 0 rgba(0,0,0,0.03) !important;
+  padding: 12px 0 0 0 !important;
+}
+
+.dashboard-table .ant-table-container {
+  border-radius: 10px !important;
+  overflow: hidden;
+  border: 1px solid #e0e0e0 !important;
+}
+
+.dashboard-table .ant-table-thead > tr > th {
+  background: #f7fafc !important;
+  color: #222 !important;
+  font-weight: 600 !important;
+  border-bottom: 1.5px solid #e0e0e0 !important;
+  font-size: 14px !important;
+  padding: 8px 4px !important;
+}
+
+.dashboard-table .ant-table-tbody > tr > td {
+  border-bottom: 1px solid #f0f0f0 !important;
+  font-size: 13px !important;
+  padding: 7px 4px !important;
+  background: #fff !important;
+}
+
+.dashboard-table .ant-table-tbody > tr.summary-row > td,
+.dashboard-table .ant-table-tbody > tr.total-row > td {
+  background: #fdf6e3 !important;
+  font-weight: bold !important;
+  color: #c47a00 !important;
+}
+
+.dashboard-table .ant-table-tbody > tr:hover > td {
+  background: #f5f7fa !important;
+}
+
+.dashboard-table .ant-table-bordered > .ant-table-container > .ant-table-content > table > thead > tr > th,
+.dashboard-table .ant-table-bordered > .ant-table-container > .ant-table-content > table > tbody > tr > td {
+  border-right: 1px solid #e0e0e0 !important;
+}
+
+.dashboard-table .ant-table-bordered > .ant-table-container > .ant-table-content > table > thead > tr > th {
+  border-bottom: 1.5px solid #e0e0e0 !important;
+}
+
+.dashboard-table .ant-table-bordered > .ant-table-container > .ant-table-content > table > tbody > tr > td {
+  border-bottom: 1px solid #f0f0f0 !important;
+}
+
+/* 滚动条美化 */
+.dashboard-table .ant-table-body::-webkit-scrollbar,
+.dashboard-table .ant-table-content::-webkit-scrollbar {
+  width: 10px !important;
+  height: 10px !important;
+}
+.dashboard-table .ant-table-body::-webkit-scrollbar-thumb,
+.dashboard-table .ant-table-content::-webkit-scrollbar-thumb {
+  background: #e0e0e0 !important;
+  border-radius: 6px !important;
+}
+.dashboard-table .ant-table-body::-webkit-scrollbar-thumb:hover,
+.dashboard-table .ant-table-content::-webkit-scrollbar-thumb:hover {
+  background: #bdbdbd !important;
+}
+.dashboard-table .ant-table-body::-webkit-scrollbar-track,
+.dashboard-table .ant-table-content::-webkit-scrollbar-track {
+  background: #fafafa !important;
+}
+
+/* 卡片阴影和圆角 */
+.ant-card.dashboard-card {
+  border-radius: 14px !important;
+  box-shadow: 0 2px 16px 0 rgba(0,0,0,0.07), 0 1.5px 4px 0 rgba(0,0,0,0.03) !important;
+  border: none !important;
+}
+
+/* 按钮间距优化 */
+.dashboard-table .ant-btn {
+  margin-right: 10px;
+  margin-bottom: 6px;
+}
+.dashboard-table .ant-btn:last-child {
+  margin-right: 0;
+}
+
+/* 汇总行样式 */
+.dashboard-table .summary-row {
+  background-color: #fafafa;
+  font-weight: bold;
+}
+
+.dashboard-table .summary-row td {
+  background-color: #fafafa !important;
+}
+
+/* 可编辑单元格输入框居中 */
+.editable-cell-input-center .ant-input-number-input {
+  text-align: center !important;
+}
+
+/* 表格内所有 InputNumber 输入框居中 */
+.dashboard-table .ant-input-number-input {
+  text-align: center !important;
+}
+

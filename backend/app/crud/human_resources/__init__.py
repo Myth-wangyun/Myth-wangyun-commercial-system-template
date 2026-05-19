@@ -1,0 +1,53 @@
+"""
+人力资源相关 CRUD
+"""
+
+from . import (
+    appointment_interview_record,
+    approval_workflow,
+    dashboard,
+    dashboard_scope,
+    employee_archive,
+    interview_registration,
+    management_center_daily_recruitment_manual,
+    promotion_application,
+    promotion_interview,
+    recruitment_request,
+    regularization_application,
+    resignation_approval,
+    social_insurance_application,
+    social_insurance_cost_summary,
+    training_application,
+    training_goal,
+    training_result,
+    training_satisfaction,
+    transfer_application,
+    unpaid_leave_application,
+    work_report,
+    work_handover,
+)
+
+__all__ = [
+    "appointment_interview_record",
+    "approval_workflow",
+    "employee_archive",
+    "dashboard",
+    "dashboard_scope",
+    "interview_registration",
+    "management_center_daily_recruitment_manual",
+    "promotion_application",
+    "promotion_interview",
+    "regularization_application",
+    "recruitment_request",
+    "resignation_approval",
+    "social_insurance_application",
+    "social_insurance_cost_summary",
+    "training_application",
+    "training_goal",
+    "training_result",
+    "training_satisfaction",
+    "transfer_application",
+    "unpaid_leave_application",
+    "work_report",
+    "work_handover",
+]

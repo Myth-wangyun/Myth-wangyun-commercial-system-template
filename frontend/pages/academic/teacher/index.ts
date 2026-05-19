@@ -1,0 +1,10 @@
+// 教员管理模块导出
+export { default as TeacherManagement } from './TeacherManagement'
+export { default as TeacherKPI } from './kpi'
+export { default as TeacherDailyWork } from './daily-work'
+export { default as TeacherFunctionAnalysis } from './function-analysis'
+export { default as StudentInterviewRecord } from './student-interview'
+export { default as TeachingActivityPlan } from './teaching-activity-plan'
+export { default as StandardizationCheck } from '../campus/05-manage-data/24-academic-staff-standard-check/standardization-check'
+export { default as MeetingRecord } from './meeting-record'
+export { default as FacultyRatio } from './faculty-ratio'

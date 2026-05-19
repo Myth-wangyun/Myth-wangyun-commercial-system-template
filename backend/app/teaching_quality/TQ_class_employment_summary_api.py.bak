@@ -1,0 +1,543 @@
+"""
+教学质量模块 - QT班级就业信息汇总表 API
+前缀：/api/v1/teaching-quality
+GET  /qt-class-employment-summary?campus=..&year=YYYY&clazz=班级名
+POST /qt-class-employment-summary { 校区名称, 年份, 班级名称, ...手填字段 }
+"""
+from typing import Optional, List
+from fastapi import APIRouter, Depends, Query
+from pydantic import BaseModel
+from sqlalchemy.orm import Session
+
+from app.core.database import get_teaching_quality_db as get_db
+
+# 动态加载 DB
+import importlib.util
+from pathlib import Path
+import sys
+
+_tq_dir = Path(__file__).resolve().parent
+
+# 加载汇总表 DB
+_summary_db_file = _tq_dir / "TQ_class_employment_summary_db.py"
+_summary_mod_name = "app.teaching_quality.TQ_class_employment_summary_db_dynamic"
+if _summary_mod_name in sys.modules:
+    _summary_db_module = sys.modules[_summary_mod_name]
+else:
+    _sspec = importlib.util.spec_from_file_location(_summary_mod_name, str(_summary_db_file))
+    _summary_db_module = importlib.util.module_from_spec(_sspec)
+    assert _sspec and _sspec.loader
+    _sspec.loader.exec_module(_summary_db_module)
+    sys.modules[_summary_mod_name] = _summary_db_module
+
+init_summary_tables = _summary_db_module.init_qt_class_employment_summary_tables
+fetch_summary = _summary_db_module.fetch_summary
+fetch_summaries_by_campus_and_year = _summary_db_module.fetch_summaries_by_campus_and_year
+upsert_summary = _summary_db_module.upsert_summary
+_normalize_campus_name = _summary_db_module._normalize_campus_name
+
+# 加载明细表 DB (用于计算)
+_detail_db_file = _tq_dir / "TQ_class_employment_info_db.py"
+_detail_mod_name = "app.teaching_quality.TQ_class_employment_info_db_dynamic"
+if _detail_mod_name in sys.modules:
+    _detail_db_module = sys.modules[_detail_mod_name]
+else:
+    _dspec = importlib.util.spec_from_file_location(_detail_mod_name, str(_detail_db_file))
+    _detail_db_module = importlib.util.module_from_spec(_dspec)
+    assert _dspec and _dspec.loader
+    _dspec.loader.exec_module(_detail_db_module)
+    sys.modules[_detail_mod_name] = _detail_db_module
+
+fetch_detail_rows = _detail_db_module.fetch_rows
+
+# 加载班级列表 DB (用于获取班主任/专业)
+_classlist_db_file = _tq_dir / "TQclass_list_db.py"
+_classlist_mod_name = "app.teaching_quality.TQclass_list_db_dynamic"
+if _classlist_mod_name in sys.modules:
+    _classlist_db_module = sys.modules[_classlist_mod_name]
+else:
+    _cspec = importlib.util.spec_from_file_location(_classlist_mod_name, str(_classlist_db_file))
+    _classlist_db_module = importlib.util.module_from_spec(_cspec)
+    assert _cspec and _cspec.loader
+    _cspec.loader.exec_module(_classlist_db_module)
+    sys.modules[_classlist_mod_name] = _classlist_db_module
+
+get_class_by_name = _classlist_db_module.get_class_by_name
+
+# 加载班级档案 DB (用于获取专业/学制)
+_classfile_db_file = _tq_dir / "TQclass_file_record_db.py"
+_classfile_mod_name = "app.teaching_quality.TQclass_file_record_db_dynamic"
+if _classfile_mod_name in sys.modules:
+    _classfile_db_module = sys.modules[_classfile_mod_name]
+else:
+    _fspec = importlib.util.spec_from_file_location(_classfile_mod_name, str(_classfile_db_file))
+    _classfile_db_module = importlib.util.module_from_spec(_fspec)
+    assert _fspec and _fspec.loader
+    _fspec.loader.exec_module(_classfile_db_module)
+    sys.modules[_classfile_mod_name] = _classfile_db_module
+
+fetch_class_file_rows = _classfile_db_module.fetch_class_file_rows
+
+# 创建路由
+router = APIRouter()
+print("[teaching-quality] qt-class-employment-summary 路由模块已加载")
+
+class SummaryData(BaseModel):
+    结案人数: Optional[int] = None
+    需就业人数: Optional[int] = None
+    实际就业人数: Optional[int] = None
+    实际就业率: Optional[float] = None
+    实际需就业率: Optional[float] = None
+    目标平均薪资: Optional[int] = None
+    实际平均薪资: Optional[int] = None
+    就业达标率: Optional[float] = None
+    薪资过万人数: Optional[int] = None
+    教员: Optional[str] = None
+    班主任: Optional[str] = None
+
+class SummaryRow(SummaryData):
+    校区名称: str
+    年份: int
+    班级名称: str
+    专业: Optional[str] = None
+    学制: Optional[str] = None
+
+class SavePayload(BaseModel):
+    class Config:
+        extra = "allow"
+    
+    校区名称: str
+    年份: int
+    班级名称: str
+    需就业人数: Optional[int] = None
+    实际就业人数: Optional[int] = None
+    目标平均薪资: Optional[int] = None
+    教员: Optional[str] = None
+
+@router.on_event("startup")
+def _startup_init():
+    try:
+        init_summary_tables()
+    except Exception as e:
+        print(f"[teaching-quality] 初始化 QT班级就业信息汇总表失败: {e}")
+
+@router.get("/qt-class-employment-summary/years", response_model=List[int], summary="获取指定校区的可用年份列表")
+def get_available_years(
+    campus: str = Query(..., alias="campus"),
+    db: Session = Depends(get_db),
+):
+    """
+    获取指定校区在QT班级就业信息汇总表中的所有可用年份（去重、升序）。
+    """
+    try:
+        from sqlalchemy import or_, distinct
+        norm = str(campus).strip()
+        norm2 = norm.replace("校区", "") if "校区" in norm else norm
+        
+        years = (
+            db.query(distinct(_summary_db_module.QT班级就业信息汇总表.年份))
+            .filter(
+                or_(
+                    _summary_db_module.QT班级就业信息汇总表.校区名称 == norm,
+                    _summary_db_module.QT班级就业信息汇总表.校区名称 == norm2,
+                    _summary_db_module.QT班级就业信息汇总表.校区名称.ilike(f"{norm}%"),
+                    _summary_db_module.QT班级就业信息汇总表.校区名称.ilike(f"{norm2}%"),
+                )
+            )
+            .order_by(_summary_db_module.QT班级就业信息汇总表.年份.desc())
+            .all()
+        )
+        
+        return [int(y[0]) for y in years if y[0] is not None]
+    except Exception as e:
+        print(f"[teaching-quality] 获取可用年份失败: {e}")
+        return []
+
+
+def _generate_summary_from_detail(db: Session, campus: str, year: int) -> List[SummaryRow]:
+    """
+    当汇总表没有数据时，从明细表（QT班就业信息表）动态生成班级就业汇总数据。
+    """
+    from sqlalchemy import or_
+    
+    norm = str(campus).strip()
+    norm2 = norm.replace("校区", "") if "校区" in norm else norm
+    
+    # 从明细表获取该校区该年份的所有班级
+    detail_rows = (
+        db.query(_detail_db_module.QT班就业信息表)
+        .filter(
+            _detail_db_module.QT班就业信息表.年份 == year,
+            or_(
+                _detail_db_module.QT班就业信息表.校区名称 == norm,
+                _detail_db_module.QT班就业信息表.校区名称 == norm2,
+                _detail_db_module.QT班就业信息表.校区名称.ilike(f"{norm}%"),
+                _detail_db_module.QT班就业信息表.校区名称.ilike(f"{norm2}%"),
+            ),
+        )
+        .all()
+    )
+    
+    if not detail_rows:
+        print(f"[qt-class-employment-summary/list] 明细表也没有数据")
+        return []
+    
+    # 按班级分组统计
+    class_stats = {}
+    for row in detail_rows:
+        class_name = row.班级名称
+        if not class_name:
+            continue
+            
+        if class_name not in class_stats:
+            class_stats[class_name] = {
+                "校区名称": row.校区名称,
+                "年份": year,
+                "班级名称": class_name,
+                "records": [],
+            }
+        class_stats[class_name]["records"].append(row)
+    
+    result: List[SummaryRow] = []
+    
+    for class_name, stats in class_stats.items():
+        records = stats["records"]
+        archive_count = len([r for r in records if getattr(r, "姓名", None)])
+        
+        # 计算薪资统计
+        salaries = [
+            getattr(r, "回访考核薪资") or getattr(r, "转正薪资") or getattr(r, "试用期薪资")
+            for r in records
+            if (getattr(r, "回访考核薪资", None) or getattr(r, "转正薪资", None) or getattr(r, "试用期薪资", None))
+        ]
+        salaries = [s for s in salaries if s and s > 0]
+        
+        actual_avg_salary = int(sum(salaries) / len(salaries)) if salaries else 0
+        over10k_count = len([s for s in salaries if s >= 10000])
+        
+        # 获取班级信息（专业、学制、班主任）
+        专业 = None
+        学制 = None
+        班主任 = None
+        try:
+            cls = get_class_by_name(db, campus=stats["校区名称"], class_name=class_name)
+            if cls:
+                专业 = getattr(cls, "专业", None)
+                学制 = getattr(cls, "学制", None)
+                班主任 = getattr(cls, "班主任", None)
+        except Exception:
+            pass
+        
+        item = {
+            "校区名称": stats["校区名称"],
+            "年份": year,
+            "班级名称": class_name,
+            "结案人数": archive_count,
+            "需就业人数": archive_count,  # 假设需就业人数等于档案人数
+            "实际就业人数": len(salaries),  # 有薪资的人数作为已就业人数
+            "实际就业率": round(len(salaries) / archive_count, 4) if archive_count > 0 else 0.0,
+            "实际需就业率": round(len(salaries) / archive_count, 4) if archive_count > 0 else 0.0,
+            "目标平均薪资": 8000,  # 默认目标薪资
+            "实际平均薪资": actual_avg_salary,
+            "就业达标率": round(actual_avg_salary / 8000, 4) if actual_avg_salary > 0 else 0.0,
+            "薪资过万人数": over10k_count,
+            "教员": None,
+            "班主任": 班主任,
+            "专业": 专业,
+            "学制": 学制,
+        }
+        
+        result.append(SummaryRow.model_validate(item))
+    
+    print(f"[qt-class-employment-summary/list] 从明细表生成了 {len(result)} 条班级汇总")
+    return result
+
+@router.get("/qt-class-employment-summary/list", response_model=List[SummaryRow], summary="获取指定校区（可选年份）的所有班级就业汇总列表")
+def get_summary_list(
+    campus: str = Query(..., alias="campus"),
+    year: Optional[int] = Query(None, alias="year"),
+    db: Session = Depends(get_db),
+):
+    """
+    返回某校区（可选年份）的所有班级就业汇总。
+    - 若未指定年份，自动选取该校区在汇总表中的最大年份。
+    - 动态计算档案人数/实际平均薪资/实际就业率/实际需就业率/就业达标率，并补齐班主任。
+    """
+    print(f"[qt-class-employment-summary/list] 查询参数 - campus: {campus}, year: {year}")
+    
+    # 自动确定年份
+    target_year = year
+    if target_year is None:
+        try:
+            # 直接用 ORM 求最大年份（兼容“盛邦/盛邦校区”等写法）
+            from sqlalchemy import or_
+            norm = str(campus).strip()
+            norm2 = norm.replace("校区", "") if "校区" in norm else norm
+            max_year = (
+                db.query(_summary_db_module.QT班级就业信息汇总表.年份)
+                .filter(
+                    or_(
+                        _summary_db_module.QT班级就业信息汇总表.校区名称 == norm,
+                        _summary_db_module.QT班级就业信息汇总表.校区名称 == norm2,
+                        _summary_db_module.QT班级就业信息汇总表.校区名称.ilike(f"{norm}%"),
+                        _summary_db_module.QT班级就业信息汇总表.校区名称.ilike(f"{norm2}%"),
+                    )
+                )
+                .order_by(_summary_db_module.QT班级就业信息汇总表.年份.desc())
+                .limit(1)
+                .scalar()
+            )
+            target_year = int(max_year) if max_year is not None else 0
+        except Exception:
+            target_year = 0
+    
+    print(f"[qt-class-employment-summary/list] 使用年份: {target_year}")
+
+    summaries = fetch_summaries_by_campus_and_year(db, 校区名称=campus, 年份=int(target_year or 0))
+    
+    print(f"[qt-class-employment-summary/list] 查询到的汇总记录数: {len(summaries)}")
+    
+    # 若汇总表无数据，从明细表动态生成
+    if not summaries and target_year:
+        return _generate_summary_from_detail(db, campus, target_year)
+
+    result: List[SummaryRow] = []
+    for s in summaries:
+        # 基础字段
+        item = {
+            "校区名称": s.校区名称,
+            "年份": s.年份,
+            "班级名称": s.班级名称,
+            "结案人数": s.结案人数 or 0,
+            "需就业人数": s.需就业人数 or 0,
+            "实际就业人数": s.实际就业人数 or 0,
+            "实际就业率": s.实际就业率 or 0.0,
+            "实际需就业率": s.实际需就业率 or 0.0,
+            "目标平均薪资": s.目标平均薪资 or 0,
+            "实际平均薪资": s.实际平均薪资 or 0,
+            "就业达标率": s.就业达标率 or 0.0,
+            "教员": s.教员 or None,
+            "班主任": s.班主任 or None,
+            # 专业/学制稍后从班级档案或班级列表补齐
+            "专业": None,
+            "学制": None,
+        }
+
+        # 先从班级列表直接读取“专业/学制”（权威来源）
+        try:
+            cls = get_class_by_name(db, campus=s.校区名称, class_name=s.班级名称)
+            if cls:
+                if getattr(cls, "专业", None):
+                    item["专业"] = cls.专业
+                if getattr(cls, "学制", None):
+                    item["学制"] = cls.学制
+        except Exception:
+            pass
+        # 若仍缺少，再从班级档案中按多数值推断
+        try:
+            if not item.get("专业") or not item.get("学制"):
+                cf_rows = fetch_class_file_rows(db, 校区名称=s.校区名称, 班级名称=s.班级名称)
+                majors = [getattr(r, "所报专业", None) or getattr(r, "专业", None) for r in cf_rows]
+                majors = [str(x).strip() for x in majors if x]
+                lengths = [getattr(r, "学制", None) for r in cf_rows]
+                lengths = [str(x).strip() for x in lengths if x]
+                def _most_common(arr: list[str]) -> Optional[str]:
+                    if not arr:
+                        return None
+                    from collections import Counter
+                    return Counter(arr).most_common(1)[0][0]
+                if not item.get("专业"):
+                    item["专业"] = _most_common(majors)
+                if not item.get("学制"):
+                    item["学制"] = _most_common(lengths)
+        except Exception:
+            pass
+
+        # 明细表计算
+        rows = fetch_detail_rows(db, 校区名称=s.校区名称, 年份=s.年份, 班级名称=s.班级名称)
+        archive_count = len([r for r in rows if getattr(r, "姓名", None)])
+        item["结案人数"] = archive_count
+
+        salaries = [
+            getattr(r, "回访考核薪资")
+            for r in rows
+            if getattr(r, "回访考核薪资", None) is not None and getattr(r, "回访考核薪资") > 0
+        ]
+        actual_avg_salary = int(sum(salaries) / len(salaries)) if salaries else 0
+        item["实际平均薪资"] = actual_avg_salary
+
+        # 薪资过万人数（按回访考核薪资 >= 10000 统计）
+        over10k = [
+            getattr(r, "回访考核薪资")
+            for r in rows
+            if getattr(r, "回访考核薪资", None) is not None and getattr(r, "回访考核薪资") >= 10000
+        ]
+        item["薪资过万人数"] = len(over10k)
+
+        # 比例
+        if archive_count > 0:
+            item["实际就业率"] = round(float(item.get("实际就业人数", 0) or 0) / float(archive_count), 4)
+        else:
+            item["实际就业率"] = 0.0
+
+        need_cnt = item.get("需就业人数", 0) or 0
+        if need_cnt > 0:
+            item["实际需就业率"] = round(float(item.get("实际就业人数", 0) or 0) / float(need_cnt), 4)
+        else:
+            item["实际需就业率"] = 0.0
+
+        target_avg = item.get("目标平均薪资", 0) or 0
+        if target_avg > 0:
+            item["就业达标率"] = round(float(actual_avg_salary) / float(target_avg), 4)
+        else:
+            item["就业达标率"] = 0.0
+
+        # 班主任补齐
+        if not item.get("班主任"):
+            info = get_class_by_name(db, campus=s.校区名称, class_name=s.班级名称)
+            if info:
+                item["班主任"] = info.班主任
+
+        result.append(SummaryRow.model_validate(item))
+
+    return result
+
+@router.get("/qt-class-employment-summary", response_model=SummaryData, summary="获取 QT班级就业信息汇总")
+def get_summary(
+    campus: str = Query(..., alias="campus"),
+    year: int = Query(..., alias="year"),
+    clazz: str = Query(..., alias="clazz"),
+    db: Session = Depends(get_db),
+):
+    """
+    获取QT班级就业信息汇总
+    - 实际就业率 = 实际就业人数 / 档案人数（从明细表行数）
+    - 实际需就业率 = 实际就业人数 / 需就业人数
+    - 实际平均薪资 = 明细表中转正薪资的平均值
+    - 就业达标率 = 实际平均薪资 / 目标平均薪资
+    - 班主任 = 从班级列表读取
+    """
+    summary = fetch_summary(db, 校区名称=campus, 年份=year, 班级名称=clazz)
+    if not summary:
+        summary = _summary_db_module.QT班级就业信息汇总表()
+
+    # 获取明细表数据用于实时计算
+    detail_rows = fetch_detail_rows(db, 校区名称=campus, 年份=year, 班级名称=clazz)
+    
+    # 计算档案人数（有姓名的记录）
+    archive_count = len([r for r in detail_rows if r.姓名])
+    summary.结案人数 = archive_count
+    
+    # 计算实际平均薪资（转正薪资的平均值）
+    # 实际平均薪资按“回访考核薪资”计算
+    salaries = [r.回访考核薪资 for r in detail_rows if getattr(r, "回访考核薪资", None) is not None and getattr(r, "回访考核薪资") > 0]
+    summary.实际平均薪资 = int(sum(salaries) / len(salaries)) if salaries else 0
+    
+    # 计算实际就业率 = 实际就业人数 / 档案人数
+    if archive_count > 0:
+        summary.实际就业率 = round(float(summary.实际就业人数 or 0) / float(archive_count), 4)
+    else:
+        summary.实际就业率 = 0.0
+    
+    # 计算实际需就业率 = 实际就业人数 / 需就业人数
+    if summary.需就业人数 and summary.需就业人数 > 0:
+        summary.实际需就业率 = round(float(summary.实际就业人数 or 0) / float(summary.需就业人数), 4)
+    else:
+        summary.实际需就业率 = 0.0
+    
+    # 计算就业达标率 = 实际平均薪资 / 目标平均薪资
+    if summary.目标平均薪资 and summary.目标平均薪资 > 0:
+        summary.就业达标率 = round(float(summary.实际平均薪资) / float(summary.目标平均薪资), 4)
+    else:
+        summary.就业达标率 = 0.0
+
+    # 从班级列表获取班主任
+    class_info = get_class_by_name(db, campus=campus, class_name=clazz)
+    if class_info:
+        summary.班主任 = class_info.班主任
+
+    return SummaryData.model_validate(summary, from_attributes=True)
+
+@router.post("/qt-class-employment-summary", response_model=SummaryData, summary="保存 QT班级就业信息汇总")
+def save_summary(payload: SavePayload, db: Session = Depends(get_db)):
+    """
+    保存QT班级就业信息汇总
+    接收手填字段，并立即计算所有自动字段，然后将完整记录写入数据库。
+    """
+    # 1. 从 payload 获取手填数据（允许缺省字段）
+    summary_data = payload.model_dump(exclude_unset=True)
+
+    # 字段兜底：确保关键字段在 data 中且为正确类型
+    def to_int(v, default=0):
+        try:
+            if v in (None, ""): return default
+            return int(v)
+        except Exception:
+            try:
+                return int(float(v))
+            except Exception:
+                return default
+    def to_float(v, default=0.0):
+        try:
+            if v in (None, ""): return default
+            return float(v)
+        except Exception:
+            return default
+
+    summary_data['需就业人数'] = to_int(summary_data.get('需就业人数', 0))
+    summary_data['实际就业人数'] = to_int(summary_data.get('实际就业人数', 0))
+    summary_data['目标平均薪资'] = to_int(summary_data.get('目标平均薪资', 0))
+
+    # 2. 获取明细表数据用于实时计算
+    detail_rows = fetch_detail_rows(db, 校区名称=payload.校区名称, 年份=payload.年份, 班级名称=payload.班级名称)
+
+    # 3. 计算所有自动字段
+    # 档案人数（结案人数）
+    archive_count = len([r for r in detail_rows if getattr(r, '姓名', None)])
+    summary_data['结案人数'] = to_int(archive_count, 0)
+
+    # 实际平均薪资（按回访考核薪资）
+    salaries = [getattr(r, '回访考核薪资') for r in detail_rows if getattr(r, '回访考核薪资', None) is not None and getattr(r, '回访考核薪资') > 0]
+    actual_avg_salary = int(sum(salaries) / len(salaries)) if salaries else 0
+    summary_data['实际平均薪资'] = to_int(actual_avg_salary, 0)
+
+    # 实际就业率
+    actual_employment_rate = round(float(summary_data.get('实际就业人数', 0) or 0) / float(archive_count), 4) if archive_count > 0 else 0.0
+    summary_data['实际就业率'] = to_float(actual_employment_rate, 0.0)
+
+    # 实际需就业率
+    need_employment_count = summary_data.get('需就业人数', 0) or 0
+    if need_employment_count > 0:
+        actual_need_employment_rate = round(float(summary_data.get('实际就业人数', 0) or 0) / float(need_employment_count), 4)
+    else:
+        actual_need_employment_rate = 0.0
+    summary_data['实际需就业率'] = to_float(actual_need_employment_rate, 0.0)
+
+    # 就业达标率
+    target_avg_salary = summary_data.get('目标平均薪资', 0) or 0
+    if target_avg_salary > 0:
+        achievement_rate = round(float(summary_data['实际平均薪资']) / float(target_avg_salary), 4)
+    else:
+        achievement_rate = 0.0
+    summary_data['就业达标率'] = to_float(achievement_rate, 0.0)
+
+    # 班主任（尽最大可能写入，避免为 null）
+    class_info = get_class_by_name(db, campus=payload.校区名称, class_name=payload.班级名称)
+    if class_info and getattr(class_info, '班主任', None):
+        summary_data['班主任'] = class_info.班主任
+    else:
+        summary_data.setdefault('班主任', None)
+
+    # 4. 将完整数据写入数据库（确保所有关键字段都有值，不留 null）
+    for k in ['结案人数','需就业人数','实际就业人数','实际就业率','实际需就业率','目标平均薪资','实际平均薪资','就业达标率','教员','班主任']:
+        if k not in summary_data:
+            # 补空默认
+            summary_data[k] = 0 if k in ['结案人数','需就业人数','实际就业人数','目标平均薪资','实际平均薪资'] else 0.0 if k in ['实际就业率','实际需就业率','就业达标率'] else None
+
+    upsert_summary(db, data=summary_data)
+    db.commit()
+
+    # 5. 从数据库回读并返回，确保数据一致
+    return get_summary(campus=payload.校区名称, year=payload.年份, clazz=payload.班级名称, db=db)
+
+

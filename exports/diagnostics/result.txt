@@ -1,0 +1,62 @@
+Env: .env.production
+Database: qmjy@localhost:5432
+Generated: 2026-02-11T19:04:23.030172
+
+== Consultation Records ==
+记录ID	登记日期	登记时间	录量人	创建人ID	创建人姓名	分量人	咨询师	校区	电话
+4042	2026-01-28 08:01:00	2026-02-11 17:23:32.831016	陆杨丽	69	陆杨丽	陆杨丽		河北冀美校区	13284482230
+4043	2026-01-28 09:00:59	2026-02-11 17:23:32.845565	陆杨丽	69	陆杨丽	陆杨丽		河北冀美校区	13143022809
+4044	2026-01-28 08:01:00	2026-02-11 17:23:32.854506	陆杨丽	69	陆杨丽	陆杨丽		河北冀美校区	17603215011
+4045	2026-01-27 07:59:59	2026-02-11 17:23:32.862160	陆杨丽	69	陆杨丽	陆杨丽		河北冀美校区	15831940614
+4046	2026-01-26 07:59:59	2026-02-11 17:23:32.868871	陆杨丽	69	陆杨丽	陆杨丽	韩晓充	河北冀美校区	15512105053
+4047	2026-01-23 07:59:59	2026-02-11 17:23:32.876235	陆杨丽	69	陆杨丽	陆杨丽		河北冀美校区	13363815879
+4048	2026-01-23 07:59:59	2026-02-11 17:23:32.882964	陆杨丽	69	陆杨丽	陆杨丽		河北冀美校区	13739789257
+4049	2026-01-22 07:59:59	2026-02-11 17:23:32.889565	陆杨丽	69	陆杨丽	陆杨丽		河北冀美校区	18032809702
+4050	2026-01-20 07:59:59	2026-02-11 17:23:32.897085	陆杨丽	69	陆杨丽	陆杨丽		河北冀美校区	17730566662
+4051	2026-01-20 07:59:59	2026-02-11 17:23:32.903595	陆杨丽	69	陆杨丽	陆杨丽	韩晓充	河北冀美校区	18931998891
+4052	2026-01-19 07:59:59	2026-02-11 17:23:32.910484	陆杨丽	69	陆杨丽	陆杨丽		河北冀美校区	18931166978
+4053	2026-01-16 07:59:59	2026-02-11 17:23:32.917736	陆杨丽	69	陆杨丽	陆杨丽		河北冀美校区	18931873013
+4054	2026-01-13 07:59:59	2026-02-11 17:23:32.924280	陆杨丽	69	陆杨丽	陆杨丽		河北冀美校区	13290542380
+4055	2026-01-12 07:59:59	2026-02-11 17:23:32.931380	陆杨丽	69	陆杨丽	陆杨丽		河北冀美校区	17732160572
+4056	2026-01-12 07:59:59	2026-02-11 17:23:32.938662	陆杨丽	69	陆杨丽	陆杨丽		河北冀美校区	17367900729
+4057	2026-01-12 07:59:59	2026-02-11 17:23:32.945323	陆杨丽	69	陆杨丽	陆杨丽		河北冀美校区	18730167686
+4058	2026-01-10 07:59:59	2026-02-11 17:23:32.952633	陆杨丽	69	陆杨丽	陆杨丽		河北冀美校区	13249358622
+4059	2026-01-07 07:59:59	2026-02-11 17:23:32.960092	陆杨丽	69	陆杨丽	陆杨丽	尚笑莹	河北冀美校区	15831123451
+4060	2026-01-06 07:59:59	2026-02-11 17:23:32.967023	陆杨丽	69	陆杨丽	陆杨丽		河北冀美校区	13483165964
+4061	2026-01-06 07:59:59	2026-02-11 17:23:32.973635	陆杨丽	69	陆杨丽	陆杨丽	韩晓充	河北冀美校区	15081800502
+4062	2026-01-05 07:59:59	2026-02-11 17:23:32.979737	陆杨丽	69	陆杨丽	陆杨丽	康盼霞	河北冀美校区	15097356528
+4063	2026-01-05 07:59:59	2026-02-11 17:23:32.985883	陆杨丽	69	陆杨丽	陆杨丽	聂丽	河北冀美校区	18633450957
+
+== Import Logs ==
+id	ts	user_id	username	real_name	endpoint	method	status_code	ip	user_agent	request_id
+10595	2026-02-11 17:26:22.435174+08:00	66	yanjiao	闫娇	/api/v1/consult/consultation/import	POST	200	171.117.135.238	Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:146.0) Gecko/20100101 Firefox/146.0	50be345091f04877a509bc70983b466b
+10507	2026-02-11 17:23:32.990558+08:00	69	luyangli	陆杨丽	/api/v1/consult/consultation/import	POST	200	106.114.252.7	Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:147.0) Gecko/20100101 Firefox/147.0	4d85298236934159ad888ce2755c6313
+
+== Log Resources ==
+record_id	ts	user_id	username	real_name	endpoint	ip	user_agent	request_id
+4042	2026-02-11 17:23:32.990558+08:00	69	luyangli	陆杨丽	/api/v1/consult/consultation/import	106.114.252.7	Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:147.0) Gecko/20100101 Firefox/147.0	4d85298236934159ad888ce2755c6313
+4043	2026-02-11 17:23:32.990558+08:00	69	luyangli	陆杨丽	/api/v1/consult/consultation/import	106.114.252.7	Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:147.0) Gecko/20100101 Firefox/147.0	4d85298236934159ad888ce2755c6313
+4044	2026-02-11 17:23:32.990558+08:00	69	luyangli	陆杨丽	/api/v1/consult/consultation/import	106.114.252.7	Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:147.0) Gecko/20100101 Firefox/147.0	4d85298236934159ad888ce2755c6313
+4045	2026-02-11 17:23:32.990558+08:00	69	luyangli	陆杨丽	/api/v1/consult/consultation/import	106.114.252.7	Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:147.0) Gecko/20100101 Firefox/147.0	4d85298236934159ad888ce2755c6313
+4046	2026-02-11 17:23:32.990558+08:00	69	luyangli	陆杨丽	/api/v1/consult/consultation/import	106.114.252.7	Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:147.0) Gecko/20100101 Firefox/147.0	4d85298236934159ad888ce2755c6313
+4047	2026-02-11 17:23:32.990558+08:00	69	luyangli	陆杨丽	/api/v1/consult/consultation/import	106.114.252.7	Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:147.0) Gecko/20100101 Firefox/147.0	4d85298236934159ad888ce2755c6313
+4048	2026-02-11 17:23:32.990558+08:00	69	luyangli	陆杨丽	/api/v1/consult/consultation/import	106.114.252.7	Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:147.0) Gecko/20100101 Firefox/147.0	4d85298236934159ad888ce2755c6313
+4049	2026-02-11 17:23:32.990558+08:00	69	luyangli	陆杨丽	/api/v1/consult/consultation/import	106.114.252.7	Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:147.0) Gecko/20100101 Firefox/147.0	4d85298236934159ad888ce2755c6313
+4050	2026-02-11 17:23:32.990558+08:00	69	luyangli	陆杨丽	/api/v1/consult/consultation/import	106.114.252.7	Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:147.0) Gecko/20100101 Firefox/147.0	4d85298236934159ad888ce2755c6313
+4051	2026-02-11 17:23:32.990558+08:00	69	luyangli	陆杨丽	/api/v1/consult/consultation/import	106.114.252.7	Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:147.0) Gecko/20100101 Firefox/147.0	4d85298236934159ad888ce2755c6313
+4052	2026-02-11 17:23:32.990558+08:00	69	luyangli	陆杨丽	/api/v1/consult/consultation/import	106.114.252.7	Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:147.0) Gecko/20100101 Firefox/147.0	4d85298236934159ad888ce2755c6313
+4053	2026-02-11 17:23:32.990558+08:00	69	luyangli	陆杨丽	/api/v1/consult/consultation/import	106.114.252.7	Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:147.0) Gecko/20100101 Firefox/147.0	4d85298236934159ad888ce2755c6313
+4054	2026-02-11 17:23:32.990558+08:00	69	luyangli	陆杨丽	/api/v1/consult/consultation/import	106.114.252.7	Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:147.0) Gecko/20100101 Firefox/147.0	4d85298236934159ad888ce2755c6313
+4055	2026-02-11 17:23:32.990558+08:00	69	luyangli	陆杨丽	/api/v1/consult/consultation/import	106.114.252.7	Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:147.0) Gecko/20100101 Firefox/147.0	4d85298236934159ad888ce2755c6313
+4056	2026-02-11 17:23:32.990558+08:00	69	luyangli	陆杨丽	/api/v1/consult/consultation/import	106.114.252.7	Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:147.0) Gecko/20100101 Firefox/147.0	4d85298236934159ad888ce2755c6313
+4057	2026-02-11 17:23:32.990558+08:00	69	luyangli	陆杨丽	/api/v1/consult/consultation/import	106.114.252.7	Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:147.0) Gecko/20100101 Firefox/147.0	4d85298236934159ad888ce2755c6313
+4058	2026-02-11 17:23:32.990558+08:00	69	luyangli	陆杨丽	/api/v1/consult/consultation/import	106.114.252.7	Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:147.0) Gecko/20100101 Firefox/147.0	4d85298236934159ad888ce2755c6313
+4059	2026-02-11 17:23:32.990558+08:00	69	luyangli	陆杨丽	/api/v1/consult/consultation/import	106.114.252.7	Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:147.0) Gecko/20100101 Firefox/147.0	4d85298236934159ad888ce2755c6313
+4060	2026-02-11 17:23:32.990558+08:00	69	luyangli	陆杨丽	/api/v1/consult/consultation/import	106.114.252.7	Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:147.0) Gecko/20100101 Firefox/147.0	4d85298236934159ad888ce2755c6313
+4061	2026-02-11 17:23:32.990558+08:00	69	luyangli	陆杨丽	/api/v1/consult/consultation/import	106.114.252.7	Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:147.0) Gecko/20100101 Firefox/147.0	4d85298236934159ad888ce2755c6313
+4062	2026-02-11 17:23:32.990558+08:00	69	luyangli	陆杨丽	/api/v1/consult/consultation/import	106.114.252.7	Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:147.0) Gecko/20100101 Firefox/147.0	4d85298236934159ad888ce2755c6313
+4063	2026-02-11 17:23:32.990558+08:00	69	luyangli	陆杨丽	/api/v1/consult/consultation/import	106.114.252.7	Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:147.0) Gecko/20100101 Firefox/147.0	4d85298236934159ad888ce2755c6313
+
+== Creator Users ==
+user_id	username	real_name	department	position	campus	status
+69	luyangli	陆杨丽	咨询部	分析规划师专员	广西桂美校区	ACTIVE

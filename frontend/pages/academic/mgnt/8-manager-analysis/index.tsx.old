@@ -1,0 +1,156 @@
+// 学术->管理中心->经理、副经理功能分析表主页面
+
+import React, { useState } from 'react';
+import { Table, Card, Typography, Button, InputNumber } from 'antd';
+import type { ColumnsType } from 'antd/es/table';
+import { ReloadOutlined, DownloadOutlined } from '@ant-design/icons';
+
+const { Title } = Typography;
+
+interface ManagerAnalysisRecord {
+  key: string;
+  serialNumber: number;
+  campus: string;
+  name: string;
+  values: number | null;
+  responsibility: number | null;
+  execution: number | null;
+  planning: number | null;
+  organization: number | null;
+  leadership: number | null;
+  control: number | null;
+  studentEmployment: number | null;
+  reputationEnrollment: number | null;
+  newStudentStability: number | null;
+  teachingResearch: number | null;
+  total: number;
+}
+
+const mockData: ManagerAnalysisRecord[] = [
+  { key: '1', serialNumber: 1, campus: '盛邦', name: '闫梦雷', values: null, responsibility: null, execution: null, planning: null, organization: null, leadership: null, control: null, studentEmployment: null, reputationEnrollment: null, newStudentStability: null, teachingResearch: null, total: 0 },
+  { key: '2', serialNumber: 2, campus: '盛邦', name: '李新福', values: null, responsibility: null, execution: null, planning: null, organization: null, leadership: null, control: null, studentEmployment: null, reputationEnrollment: null, newStudentStability: null, teachingResearch: null, total: 0 },
+  { key: '3', serialNumber: 3, campus: '冀美', name: '赵亮', values: null, responsibility: null, execution: null, planning: null, organization: null, leadership: null, control: null, studentEmployment: null, reputationEnrollment: null, newStudentStability: null, teachingResearch: null, total: 0 },
+  { key: '4', serialNumber: 4, campus: '冀美', name: '沈玉坤', values: null, responsibility: null, execution: null, planning: null, organization: null, leadership: null, control: null, studentEmployment: null, reputationEnrollment: null, newStudentStability: null, teachingResearch: null, total: 0 },
+  { key: '5', serialNumber: 5, campus: '冀美', name: '侯运统', values: null, responsibility: null, execution: null, planning: null, organization: null, leadership: null, control: null, studentEmployment: null, reputationEnrollment: null, newStudentStability: null, teachingResearch: null, total: 0 },
+  { key: '6', serialNumber: 6, campus: '石美', name: '张志恒', values: null, responsibility: null, execution: null, planning: null, organization: null, leadership: null, control: null, studentEmployment: null, reputationEnrollment: null, newStudentStability: null, teachingResearch: null, total: 0 },
+  { key: '7', serialNumber: 7, campus: '石美', name: '姜东亮', values: null, responsibility: null, execution: null, planning: null, organization: null, leadership: null, control: null, studentEmployment: null, reputationEnrollment: null, newStudentStability: null, teachingResearch: null, total: 0 },
+  { key: '8', serialNumber: 8, campus: '晋美', name: '刘华康', values: null, responsibility: null, execution: null, planning: null, organization: null, leadership: null, control: null, studentEmployment: null, reputationEnrollment: null, newStudentStability: null, teachingResearch: null, total: 0 },
+  { key: '9', serialNumber: 9, campus: '晋美', name: '冯月', values: null, responsibility: null, execution: null, planning: null, organization: null, leadership: null, control: null, studentEmployment: null, reputationEnrollment: null, newStudentStability: null, teachingResearch: null, total: 0 },
+  { key: '10', serialNumber: 10, campus: '原美', name: '崔含宇', values: null, responsibility: null, execution: null, planning: null, organization: null, leadership: null, control: null, studentEmployment: null, reputationEnrollment: null, newStudentStability: null, teachingResearch: null, total: 0 },
+  { key: '11', serialNumber: 11, campus: '原美', name: '韩艳威', values: null, responsibility: null, execution: null, planning: null, organization: null, leadership: null, control: null, studentEmployment: null, reputationEnrollment: null, newStudentStability: null, teachingResearch: null, total: 0 },
+  { key: '12', serialNumber: 12, campus: '太美', name: '王阳', values: null, responsibility: null, execution: null, planning: null, organization: null, leadership: null, control: null, studentEmployment: null, reputationEnrollment: null, newStudentStability: null, teachingResearch: null, total: 0 },
+  { key: '13', serialNumber: 13, campus: '桂美', name: '伍瑶', values: null, responsibility: null, execution: null, planning: null, organization: null, leadership: null, control: null, studentEmployment: null, reputationEnrollment: null, newStudentStability: null, teachingResearch: null, total: 0 },
+  { key: '14', serialNumber: 14, campus: '桂美', name: '何汕', values: null, responsibility: null, execution: null, planning: null, organization: null, leadership: null, control: null, studentEmployment: null, reputationEnrollment: null, newStudentStability: null, teachingResearch: null, total: 0 },
+];
+
+const ManagerAnalysisPage: React.FC = () => {
+  const [data, setData] = useState<ManagerAnalysisRecord[]>(mockData);
+
+  const recompute = (record: ManagerAnalysisRecord) => {
+    const sum = (record.values ?? 0) + (record.responsibility ?? 0) + (record.execution ?? 0) 
+      + (record.planning ?? 0) + (record.organization ?? 0) + (record.leadership ?? 0) 
+      + (record.control ?? 0) + (record.studentEmployment ?? 0) + (record.reputationEnrollment ?? 0) 
+      + (record.newStudentStability ?? 0) + (record.teachingResearch ?? 0);
+    return { ...record, total: sum };
+  };
+
+  const onChange = (key: string, field: keyof ManagerAnalysisRecord, value: number | null) => {
+    setData(prev => prev.map(x => {
+      if (x.key !== key) return x;
+      const next = { ...x, [field]: value } as ManagerAnalysisRecord;
+      return recompute(next);
+    }));
+  };
+
+  const columns: ColumnsType<ManagerAnalysisRecord> = [
+    { title: '序号', dataIndex: 'serialNumber', key: 'serialNumber', width: 50, align: 'center' },
+    { title: '校区', dataIndex: 'campus', key: 'campus', width: 70 },
+    { title: '姓名', dataIndex: 'name', key: 'name', width: 80 },
+    {
+      title: '思想',
+      children: [
+        { title: '价值观', key: 'values', width: 60, align: 'right', render: (_, r) => (
+          <InputNumber min={0} value={r.values} onChange={v => onChange(r.key, 'values', v)} style={{ width: '100%' }} />
+        ) },
+        { title: '责任感', key: 'responsibility', width: 60, align: 'right', render: (_, r) => (
+          <InputNumber min={0} value={r.responsibility} onChange={v => onChange(r.key, 'responsibility', v)} style={{ width: '100%' }} />
+        ) },
+      ]
+    },
+    {
+      title: '管理',
+      children: [
+        { title: '执行力', key: 'execution', width: 60, align: 'right', render: (_, r) => (
+          <InputNumber min={0} value={r.execution} onChange={v => onChange(r.key, 'execution', v)} style={{ width: '100%' }} />
+        ) },
+        { title: '计划', key: 'planning', width: 60, align: 'right', render: (_, r) => (
+          <InputNumber min={0} value={r.planning} onChange={v => onChange(r.key, 'planning', v)} style={{ width: '100%' }} />
+        ) },
+        { title: '组织', key: 'organization', width: 60, align: 'right', render: (_, r) => (
+          <InputNumber min={0} value={r.organization} onChange={v => onChange(r.key, 'organization', v)} style={{ width: '100%' }} />
+        ) },
+        { title: '领导', key: 'leadership', width: 60, align: 'right', render: (_, r) => (
+          <InputNumber min={0} value={r.leadership} onChange={v => onChange(r.key, 'leadership', v)} style={{ width: '100%' }} />
+        ) },
+        { title: '控制', key: 'control', width: 60, align: 'right', render: (_, r) => (
+          <InputNumber min={0} value={r.control} onChange={v => onChange(r.key, 'control', v)} style={{ width: '100%' }} />
+        ) },
+      ]
+    },
+    {
+      title: '业务能力',
+      children: [
+        { title: '学员就业', key: 'studentEmployment', width: 70, align: 'right', render: (_, r) => (
+          <InputNumber min={0} value={r.studentEmployment} onChange={v => onChange(r.key, 'studentEmployment', v)} style={{ width: '100%' }} />
+        ) },
+        { title: '口碑招生', key: 'reputationEnrollment', width: 70, align: 'right', render: (_, r) => (
+          <InputNumber min={0} value={r.reputationEnrollment} onChange={v => onChange(r.key, 'reputationEnrollment', v)} style={{ width: '100%' }} />
+        ) },
+        { title: '新生维稳', key: 'newStudentStability', width: 70, align: 'right', render: (_, r) => (
+          <InputNumber min={0} value={r.newStudentStability} onChange={v => onChange(r.key, 'newStudentStability', v)} style={{ width: '100%' }} />
+        ) },
+        { title: '教学研发', key: 'teachingResearch', width: 70, align: 'right', render: (_, r) => (
+          <InputNumber min={0} value={r.teachingResearch} onChange={v => onChange(r.key, 'teachingResearch', v)} style={{ width: '100%' }} />
+        ) },
+      ]
+    },
+    { title: '合计', dataIndex: 'total', key: 'total', width: 60, align: 'right', render: (v) => <strong>{v}</strong> },
+  ];
+
+  const exportCsv = () => {
+    const headers = ['序号', '校区', '姓名', '价值观', '责任感', '执行力', '计划', '组织', '领导', '控制', '学员就业', '口碑招生', '新生维稳', '教学研发', '合计'];
+    const rows = data.map(r => [r.serialNumber, r.campus, r.name, r.values || '', r.responsibility || '', r.execution || '', r.planning || '', r.organization || '', r.leadership || '', r.control || '', r.studentEmployment || '', r.reputationEnrollment || '', r.newStudentStability || '', r.teachingResearch || '', r.total]);
+    const csv = [headers, ...rows].map(x => x.map(y => `"${y}"`).join(',')).join('\n');
+    const blob = new Blob(['\ufeff' + csv], { type: 'text/csv;charset=utf-8;' });
+    const a = document.createElement('a');
+    a.href = URL.createObjectURL(blob);
+    a.download = `经理副经理功能分析表_${new Date().toISOString().split('T')[0]}.csv`;
+    a.click();
+  };
+
+  return (
+    <div style={{ padding: 24 }}>
+      <div style={{ marginBottom: 16 }}>
+        <Title level={2}>管理中心学术部经理、副经理功能分析表</Title>
+      </div>
+
+      <Card>
+        <div style={{ marginBottom: 16 }}>
+          <Button icon={<ReloadOutlined />} onClick={() => setData(d => d.map(recompute))}>重新计算</Button>
+          <Button icon={<DownloadOutlined />} onClick={exportCsv} style={{ marginLeft: 8 }}>导出CSV</Button>
+        </div>
+
+        <Table
+          columns={columns}
+          dataSource={data}
+          rowKey="key"
+          pagination={false}
+          scroll={{ x: 1200 }}
+          bordered
+        />
+      </Card>
+    </div>
+  );
+};
+
+export default ManagerAnalysisPage;

@@ -1,0 +1,4 @@
+.centerInput :global(.ant-input-number-input) {
+  text-align: center;
+}
+

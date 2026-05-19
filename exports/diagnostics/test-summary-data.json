@@ -1,0 +1,37 @@
+{
+  "班级ID": "Y22411",
+  "升学月份": "2025年01月",
+  "数据": {
+    "serialNumber": 1,
+    "promotionMonth": "2025年01月",
+    "classId": "Y22411",
+    "studentsOnFile": {
+      "total": 30,
+      "朝阳校区": 15,
+      "海淀校区": 15
+    },
+    "targetStudents": {
+      "total": 25,
+      "朝阳校区": 12,
+      "海淀校区": 13
+    },
+    "projectedPromotionRateByCount": 83.33,
+    "unitPrice": 3000,
+    "receivable": {
+      "total": 90000,
+      "朝阳校区": 45000,
+      "海淀校区": 45000
+    },
+    "projectedPromotionAmount": {
+      "total": 75000,
+      "朝阳校区": 36000,
+      "海淀校区": 39000
+    },
+    "projectedPromotionRateByAmount": 83.33,
+    "actualPromotionCount": 20,
+    "actualPromotionAmount": 60000,
+    "actualPromotionRateByAmount": 66.67,
+    "headTeacher": "张老师",
+    "instructor": ""
+  }
+}

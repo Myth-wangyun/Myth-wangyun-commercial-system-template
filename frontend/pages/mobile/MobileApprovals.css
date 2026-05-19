@@ -1,0 +1,167 @@
+/* ============================================
+   移动端审批中心页样式
+   ============================================ */
+
+.m-approvals {
+  min-height: 100%;
+  background: #f5f5f5;
+  padding-bottom: 16px;
+}
+
+.m-approvals-header {
+  background: linear-gradient(135deg, #13c2c2 0%, #36cfc9 100%);
+  padding: 20px 16px 24px;
+  border-radius: 0 0 20px 20px;
+}
+
+.m-approvals-header-title {
+  color: #fff;
+  margin: 0 !important;
+}
+
+.m-approvals-header-desc {
+  color: rgba(255, 255, 255, 0.8);
+  font-size: 13px;
+  margin-top: 4px;
+  display: block;
+}
+
+/* 统计卡片 */
+.m-approvals-stats {
+  display: flex;
+  gap: 10px;
+  padding: 16px;
+  margin-top: -12px;
+}
+
+.m-approvals-stat-card {
+  flex: 1;
+  background: #fff;
+  border-radius: 12px;
+  padding: 14px;
+  text-align: center;
+  box-shadow: 0 1px 4px rgba(0, 0, 0, 0.06);
+}
+
+.m-approvals-stat-value {
+  font-size: 24px;
+  font-weight: 700;
+  line-height: 1.2;
+}
+
+.m-approvals-stat-label {
+  font-size: 12px;
+  color: #999;
+  margin-top: 4px;
+}
+
+/* 标签栏 */
+.m-approvals-tabs {
+  display: flex;
+  padding: 0 16px;
+  gap: 0;
+}
+
+.m-approvals-tab {
+  flex: 1;
+  text-align: center;
+  padding: 8px 0;
+  font-size: 14px;
+  color: #999;
+  border-bottom: 2px solid transparent;
+  cursor: pointer;
+  transition: all 0.2s;
+  -webkit-tap-highlight-color: transparent;
+}
+
+.m-approvals-tab.active {
+  color: #13c2c2;
+  border-bottom-color: #13c2c2;
+  font-weight: 600;
+}
+
+/* 审批列表 */
+.m-approvals-list {
+  padding: 12px 16px;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.m-approval-card {
+  background: #fff;
+  border-radius: 12px;
+  padding: 14px 16px;
+  box-shadow: 0 1px 4px rgba(0, 0, 0, 0.06);
+}
+
+.m-approval-top {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+}
+
+.m-approval-title {
+  font-size: 15px;
+  font-weight: 600;
+  color: #333;
+  flex: 1;
+}
+
+.m-approval-status {
+  font-size: 12px;
+  padding: 2px 8px;
+  border-radius: 4px;
+  flex-shrink: 0;
+}
+
+.m-approval-status.pending {
+  background: #fff7e6;
+  color: #fa8c16;
+}
+
+.m-approval-status.approved {
+  background: #f6ffed;
+  color: #52c41a;
+}
+
+.m-approval-status.rejected {
+  background: #fff1f0;
+  color: #ff4d4f;
+}
+
+.m-approval-info {
+  margin-top: 8px;
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.m-approval-info-row {
+  font-size: 13px;
+  color: #999;
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+
+.m-approval-actions {
+  display: flex;
+  gap: 10px;
+  margin-top: 12px;
+  padding-top: 12px;
+  border-top: 1px solid #f0f0f0;
+}
+
+/* 空态 */
+.m-approvals-empty {
+  text-align: center;
+  padding: 60px 16px;
+  color: #999;
+}
+
+.m-approvals-empty-icon {
+  font-size: 48px;
+  color: #d9d9d9;
+  margin-bottom: 12px;
+}

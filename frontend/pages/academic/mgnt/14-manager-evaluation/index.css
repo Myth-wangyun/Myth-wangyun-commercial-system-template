@@ -1,0 +1,6 @@
+/* 管理中心学术部学术经理功能评价表样式 */
+
+/* InputNumber 输入框居中 */
+.ant-input-number-input {
+  text-align: center !important;
+}

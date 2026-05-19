@@ -1,0 +1,145 @@
+/* 移动端 - 咨询记录样式 */
+
+.mobile-consultation-records {
+  min-height: 100vh;
+  background: #f5f5f5;
+  padding-bottom: 60px;
+}
+
+/* 顶部区域 */
+.m-records-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 16px;
+  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  color: white;
+}
+
+.m-records-header h2 {
+  margin: 0;
+  font-size: 18px;
+  font-weight: 600;
+  color: white;
+}
+
+/* 咨询者列表 */
+.m-consult-records-list {
+  padding: 16px;
+}
+
+.m-consult-records-list .list-header {
+  margin-bottom: 16px;
+}
+
+.m-consult-records-list .list-content {
+  margin-top: 16px;
+}
+
+.m-consult-records-list .loading-wrapper {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 60px 0;
+}
+
+/* 咨询者卡片 */
+.record-card {
+  margin-bottom: 12px;
+  border-radius: 8px;
+}
+
+.record-card .card-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 12px;
+}
+
+.record-card .card-header .name {
+  font-size: 16px;
+  font-weight: 600;
+  color: #262626;
+}
+
+.record-card .card-body .info-row {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  margin-bottom: 8px;
+  font-size: 14px;
+  color: #595959;
+}
+
+.record-card .card-body .info-row:last-child {
+  margin-bottom: 0;
+}
+
+.record-card .card-body .separator {
+  color: #d9d9d9;
+  margin: 0 8px;
+}
+
+/* 沟通记录详情 */
+.m-consult-comm-detail {
+  padding: 16px;
+}
+
+.m-consult-comm-detail .detail-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 16px;
+}
+
+.m-consult-comm-detail .person-info {
+  margin-bottom: 16px;
+  border-radius: 8px;
+}
+
+.m-consult-comm-detail .person-info .info-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 12px;
+}
+
+.m-consult-comm-detail .person-info h3 {
+  margin: 0;
+  font-size: 18px;
+  font-weight: 600;
+}
+
+/* 沟通记录列表 */
+.m-consult-comm-detail .comm-list {
+  background: white;
+  padding: 16px;
+  border-radius: 8px;
+}
+
+.m-consult-comm-detail .comm-list h4 {
+  margin-bottom: 16px;
+  font-size: 16px;
+  font-weight: 600;
+  color: #262626;
+}
+
+.m-consult-comm-detail .comm-list .ant-list-item {
+  padding: 12px 0;
+  border-bottom: 1px solid #f0f0f0;
+}
+
+.m-consult-comm-detail .comm-list .ant-list-item:last-child {
+  border-bottom: none;
+}
+
+/* 响应式 */
+@media (max-width: 360px) {
+  .record-card .card-header .name {
+    font-size: 15px;
+  }
+  
+  .m-records-header h2 {
+    font-size: 16px;
+  }
+}

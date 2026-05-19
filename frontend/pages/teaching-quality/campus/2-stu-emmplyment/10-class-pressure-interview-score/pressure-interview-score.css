@@ -1,0 +1,13 @@
+/* Styles for PressureInterviewPage */
+
+/* Highlight failing scores (<6) */
+.pressure-score-fail {
+  border-color: #ff4d4f !important;
+  box-shadow: 0 0 0 2px rgba(255, 77, 79, 0.15) !important;
+}
+
+/* Table layout helpers */
+.pressure-interview-table :global(.ant-table-thead > tr > th) {
+  vertical-align: top;
+}
+

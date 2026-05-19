@@ -1,0 +1,53 @@
+.project-score-table .ant-table-body,
+.project-score-table .ant-table-content,
+.project-score-table .ant-table-content > div,
+.project-score-table .ant-table-container {
+  scrollbar-width: auto;
+  scrollbar-color: #2b2f38 #c2c7d3;
+  --rc-virtual-list-scrollbar-bg: #1f2229;
+}
+
+.project-score-table .ant-table-body::-webkit-scrollbar,
+.project-score-table .ant-table-content::-webkit-scrollbar,
+.project-score-table .ant-table-content > div::-webkit-scrollbar,
+.project-score-table .ant-table-container::-webkit-scrollbar {
+  height: 12px;
+  width: 12px;
+}
+
+.project-score-table .ant-table-body::-webkit-scrollbar-track,
+.project-score-table .ant-table-content::-webkit-scrollbar-track,
+.project-score-table .ant-table-content > div::-webkit-scrollbar-track,
+.project-score-table .ant-table-container::-webkit-scrollbar-track {
+  background: #c2c7d3 !important;
+  border-radius: 10px;
+}
+
+.project-score-table .ant-table-body::-webkit-scrollbar-thumb,
+.project-score-table .ant-table-content::-webkit-scrollbar-thumb,
+.project-score-table .ant-table-content > div::-webkit-scrollbar-thumb,
+.project-score-table .ant-table-container::-webkit-scrollbar-thumb {
+  background: #2b2f38 !important;
+  border-radius: 10px;
+}
+
+.project-score-table .ant-table-body::-webkit-scrollbar-thumb:hover,
+.project-score-table .ant-table-content::-webkit-scrollbar-thumb:hover,
+.project-score-table .ant-table-content > div::-webkit-scrollbar-thumb:hover,
+.project-score-table .ant-table-container::-webkit-scrollbar-thumb:hover {
+  background: #1f2229 !important;
+}
+
+.project-score-table .score-fail {
+  background: #fff5f5 !important;
+  border-color: #e03131 !important;
+}
+
+.project-score-table .score-fail.ant-input-number-focused,
+.project-score-table .score-fail:focus-within {
+  box-shadow: 0 0 0 2px rgba(224, 49, 49, 0.2);
+}
+
+.project-score-table .score-fail .ant-input-number-input {
+  color: #c92a2a;
+}

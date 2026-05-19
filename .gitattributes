@@ -1,0 +1,7 @@
+# 所有文本文件：按文本处理，统一使用 LF 存库
+* text=auto eol=lf
+
+# Windows 脚本可以例外用 CRLF（可选）
+*.bat text eol=crlf
+*.cmd text eol=crlf
+*.ps1 text eol=crlf

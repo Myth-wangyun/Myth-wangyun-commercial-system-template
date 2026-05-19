@@ -1,0 +1,289 @@
+/* 移动端咨询详情页样式 */
+
+.mobile-consultation-detail {
+  min-height: 100vh;
+  background: #f5f5f5;
+  padding-bottom: 20px;
+}
+
+/* 顶部导航 */
+.m-detail-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 12px 16px;
+  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  color: white;
+  position: sticky;
+  top: 0;
+  z-index: 100;
+}
+
+.m-detail-header h2 {
+  margin: 0;
+  font-size: 16px;
+  color: white;
+  flex: 1;
+  text-align: center;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.m-detail-header .ant-btn-text {
+  color: white !important;
+}
+
+/* Tab 样式 */
+.m-detail-tabs {
+  padding: 0 12px;
+}
+
+.m-detail-tabs .ant-tabs-nav {
+  margin-bottom: 12px;
+  background: white;
+  border-radius: 8px;
+  padding: 4px;
+}
+
+/* 基本信息区域 */
+.m-detail-section {
+  padding: 0 12px 12px;
+}
+
+.m-detail-section .info-card {
+  margin-bottom: 12px;
+  border-radius: 8px;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.06);
+}
+
+.m-detail-section .info-card .ant-card-head {
+  min-height: 36px;
+  padding: 0 12px;
+  font-size: 14px;
+}
+
+.m-detail-section .info-card .ant-card-head-title {
+  padding: 8px 0;
+  font-weight: 600;
+  color: #333;
+}
+
+.person-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 12px;
+  padding-bottom: 12px;
+  border-bottom: 1px solid #f0f0f0;
+}
+
+.person-name {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  flex-wrap: wrap;
+}
+
+.person-name .name {
+  font-size: 18px;
+  font-weight: 600;
+  color: #333;
+}
+
+.info-desc .ant-descriptions-item-label {
+  font-size: 12px;
+  color: #999;
+  white-space: nowrap;
+}
+
+.info-desc .ant-descriptions-item-content {
+  font-size: 13px;
+}
+
+/* 备注区域 */
+.remark-section {
+  margin-bottom: 12px;
+}
+
+.remark-section:last-child {
+  margin-bottom: 0;
+}
+
+.remark-label {
+  font-size: 12px;
+  color: #999;
+  margin-bottom: 4px;
+}
+
+.remark-text {
+  font-size: 13px;
+  color: #333;
+  line-height: 1.6;
+  background: #fafafa;
+  padding: 8px 12px;
+  border-radius: 4px;
+  word-break: break-all;
+}
+
+/* 沟通记录区域 */
+.m-comm-section {
+  padding: 0 12px;
+}
+
+/* 沟通概况 */
+.comm-summary {
+  display: flex;
+  gap: 8px;
+  flex-wrap: wrap;
+  margin-bottom: 12px;
+}
+
+.comm-summary .summary-item {
+  flex: 1;
+  min-width: 70px;
+  background: white;
+  border-radius: 8px;
+  padding: 10px 8px;
+  text-align: center;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.06);
+}
+
+.comm-summary .summary-item .label {
+  display: block;
+  font-size: 11px;
+  color: #999;
+  margin-bottom: 4px;
+}
+
+.comm-summary .summary-item .value {
+  display: block;
+  font-size: 18px;
+  font-weight: 600;
+  color: #333;
+}
+
+.comm-summary .summary-item.days-since.warning .value {
+  color: #ff4d4f;
+}
+
+.comm-summary .summary-item.days-since.ok .value {
+  color: #52c41a;
+}
+
+/* 沟通操作按钮 */
+.comm-actions {
+  margin-bottom: 12px;
+}
+
+/* 沟通记录卡片 */
+.comm-list {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.comm-card {
+  border-radius: 8px;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.06);
+}
+
+.comm-card-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 8px;
+}
+
+.comm-time {
+  font-size: 12px;
+  color: #666;
+}
+
+.comm-duration {
+  font-size: 11px;
+  color: #999;
+}
+
+.comm-content {
+  font-size: 13px;
+  color: #333;
+  line-height: 1.6;
+  background: #fafafa;
+  padding: 8px 12px;
+  border-radius: 4px;
+  margin-bottom: 8px;
+  word-break: break-all;
+}
+
+.comm-analysis {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 4px;
+  margin-bottom: 4px;
+}
+
+.comm-analysis:empty {
+  display: none;
+}
+
+.comm-result {
+  font-size: 12px;
+  color: #666;
+  margin-top: 6px;
+  padding: 4px 8px;
+  background: #f6ffed;
+  border-radius: 4px;
+}
+
+.comm-result .label {
+  font-weight: 500;
+  color: #52c41a;
+}
+
+.comm-conditions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 4px;
+  margin-top: 6px;
+}
+
+.comm-revisit {
+  font-size: 12px;
+  color: #1890ff;
+  margin-top: 6px;
+}
+
+.comm-consultant {
+  font-size: 12px;
+  color: #999;
+  margin-top: 4px;
+}
+
+/* 加载状态 */
+.loading-wrapper {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 60px 0;
+}
+
+/* 移动端适配 */
+@media (max-width: 360px) {
+  .comm-summary .summary-item {
+    min-width: 60px;
+    padding: 8px 4px;
+  }
+
+  .comm-summary .summary-item .value {
+    font-size: 16px;
+  }
+
+  .person-name .name {
+    font-size: 16px;
+  }
+
+  .m-detail-header h2 {
+    font-size: 14px;
+  }
+}

@@ -1,0 +1,304 @@
+/* 移动端通用数据页面样式 */
+
+/* 页面容器 */
+.m-data-page {
+  min-height: 100vh;
+  background: #f5f5f5;
+  padding-bottom: 60px;
+}
+
+/* 顶部导航 */
+.m-data-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 12px 16px;
+  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  color: white;
+  position: sticky;
+  top: 0;
+  z-index: 100;
+}
+
+.m-data-header h2 {
+  margin: 0;
+  font-size: 16px;
+  color: white;
+  flex: 1;
+  text-align: center;
+}
+
+.m-data-header .ant-btn-text {
+  color: white !important;
+}
+
+/* 筛选区域 */
+.m-data-filter {
+  padding: 12px;
+  background: white;
+  display: flex;
+  gap: 8px;
+  flex-wrap: wrap;
+  align-items: center;
+  border-bottom: 1px solid #f0f0f0;
+}
+
+.m-data-filter .ant-select,
+.m-data-filter .ant-picker {
+  flex: 1;
+  min-width: 120px;
+}
+
+/* 统计概况 */
+.m-data-summary {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(100px, 1fr));
+  gap: 8px;
+  padding: 12px;
+}
+
+.m-data-summary .summary-card {
+  background: white;
+  border-radius: 8px;
+  padding: 12px 8px;
+  text-align: center;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.06);
+}
+
+.m-data-summary .summary-card .label {
+  font-size: 11px;
+  color: #999;
+  display: block;
+  margin-bottom: 4px;
+}
+
+.m-data-summary .summary-card .value {
+  font-size: 18px;
+  font-weight: 600;
+  color: #333;
+  display: block;
+}
+
+.m-data-summary .summary-card.highlight .value {
+  color: #1677ff;
+}
+
+.m-data-summary .summary-card.success .value {
+  color: #52c41a;
+}
+
+.m-data-summary .summary-card.warning .value {
+  color: #faad14;
+}
+
+.m-data-summary .summary-card.danger .value {
+  color: #ff4d4f;
+}
+
+/* 内容区域 */
+.m-data-content {
+  padding: 12px;
+}
+
+/* 数据卡片 */
+.m-data-card {
+  margin-bottom: 12px;
+  border-radius: 8px !important;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.06) !important;
+  overflow: hidden;
+}
+
+.m-data-card .ant-card-head {
+  min-height: 36px;
+  padding: 0 12px;
+  font-size: 14px;
+  background: #fafafa;
+}
+
+.m-data-card .ant-card-head-title {
+  padding: 8px 0;
+  font-weight: 600;
+}
+
+.m-data-card .ant-card-body {
+  padding: 12px;
+}
+
+/* 数据行 */
+.m-data-row {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 6px 0;
+  border-bottom: 1px solid #f5f5f5;
+}
+
+.m-data-row:last-child {
+  border-bottom: none;
+}
+
+.m-data-row .row-label {
+  font-size: 13px;
+  color: #666;
+  flex: 1;
+}
+
+.m-data-row .row-value {
+  font-size: 13px;
+  font-weight: 500;
+  color: #333;
+  text-align: right;
+}
+
+.m-data-row .row-value.positive {
+  color: #52c41a;
+}
+
+.m-data-row .row-value.negative {
+  color: #ff4d4f;
+}
+
+/* 表格卡片 - 用于月份数据 */
+.m-month-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 6px;
+}
+
+.m-month-item {
+  background: #fafafa;
+  border-radius: 6px;
+  padding: 8px;
+  text-align: center;
+}
+
+.m-month-item .month-label {
+  font-size: 11px;
+  color: #999;
+  display: block;
+  margin-bottom: 2px;
+}
+
+.m-month-item .month-value {
+  font-size: 14px;
+  font-weight: 600;
+  color: #333;
+}
+
+/* 空状态和加载 */
+.m-data-loading {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 60px 0;
+}
+
+.m-data-empty {
+  padding: 40px 0;
+  text-align: center;
+}
+
+/* 列表项 */
+.m-list-item {
+  background: white;
+  border-radius: 8px;
+  padding: 12px;
+  margin-bottom: 10px;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.06);
+}
+
+.m-list-item .item-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 8px;
+}
+
+.m-list-item .item-title {
+  font-size: 15px;
+  font-weight: 600;
+  color: #333;
+}
+
+.m-list-item .item-body {
+  font-size: 13px;
+  color: #666;
+  line-height: 1.6;
+}
+
+.m-list-item .item-footer {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-top: 8px;
+  padding-top: 8px;
+  border-top: 1px solid #f0f0f0;
+  font-size: 12px;
+  color: #999;
+}
+
+/* 日期导航 */
+.m-date-nav {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  padding: 12px;
+  background: white;
+  border-bottom: 1px solid #f0f0f0;
+}
+
+/* 年份选择器 */
+.m-year-selector {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 12px;
+  background: white;
+  border-bottom: 1px solid #f0f0f0;
+  justify-content: center;
+}
+
+/* 检查表样式 */
+.m-check-card {
+  margin-bottom: 10px;
+  border-radius: 8px !important;
+  overflow: hidden;
+}
+
+.m-check-card .check-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.m-check-card .check-score {
+  font-size: 20px;
+  font-weight: 700;
+  color: #1677ff;
+}
+
+.m-check-card .check-meta {
+  font-size: 12px;
+  color: #999;
+  margin-top: 4px;
+}
+
+.m-check-card .check-steps {
+  margin-top: 8px;
+}
+
+/* 响应式 */
+@media (max-width: 360px) {
+  .m-data-summary {
+    grid-template-columns: repeat(2, 1fr);
+  }
+
+  .m-month-grid {
+    grid-template-columns: repeat(3, 1fr);
+  }
+
+  .m-data-summary .summary-card .value {
+    font-size: 16px;
+  }
+}

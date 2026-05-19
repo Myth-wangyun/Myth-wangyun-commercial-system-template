@@ -1,0 +1,149 @@
+/* ============================================
+   移动端咨询量列表样式
+   ============================================ */
+
+.m-list-page {
+  display: flex;
+  flex-direction: column;
+  min-height: 100%;
+}
+
+/* 搜索 */
+.m-list-search {
+  display: flex;
+  gap: 8px;
+  padding: 10px 12px;
+  background: #fff;
+  position: sticky;
+  top: 0;
+  z-index: 10;
+}
+
+.m-search-input {
+  flex: 1;
+  border-radius: 8px !important;
+}
+
+.m-filter-btn {
+  border-radius: 8px;
+}
+
+/* 筛选区 */
+.m-list-filters {
+  display: flex;
+  gap: 8px;
+  padding: 0 12px 10px;
+  background: #fff;
+  flex-wrap: wrap;
+}
+
+/* 统计栏 */
+.m-list-stats {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 8px 14px;
+  font-size: 13px;
+  color: #666;
+  flex-wrap: wrap;
+}
+
+/* 卡片列表 */
+.m-list-cards {
+  padding: 0 12px 12px;
+}
+
+.m-record-card {
+  background: #fff;
+  border-radius: 10px;
+  padding: 12px 14px;
+  margin-bottom: 8px;
+  box-shadow: 0 1px 3px rgba(0,0,0,0.06);
+  cursor: pointer;
+  transition: box-shadow 0.2s;
+  -webkit-tap-highlight-color: transparent;
+}
+
+.m-record-card:active {
+  box-shadow: 0 1px 6px rgba(0,0,0,0.12);
+}
+
+.m-card-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 8px;
+}
+
+.m-card-name {
+  font-size: 15px;
+  font-weight: 600;
+  color: #333;
+}
+
+.m-gender {
+  font-size: 12px;
+  font-weight: 400;
+  color: #999;
+  margin-left: 4px;
+}
+
+.m-card-body {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  margin-bottom: 8px;
+}
+
+.m-card-row {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  font-size: 13px;
+  color: #666;
+}
+
+.m-card-icon {
+  color: #999;
+  font-size: 12px;
+  width: 14px;
+}
+
+.m-card-footer {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding-top: 8px;
+  border-top: 1px solid #f0f0f0;
+}
+
+.m-card-detail-icon {
+  color: #999;
+  font-size: 16px;
+}
+
+/* 加载更多 */
+.m-load-more {
+  margin-top: 8px;
+  border-radius: 8px;
+  height: 40px;
+}
+
+.m-list-loading {
+  display: flex;
+  justify-content: center;
+  padding: 24px;
+}
+
+/* 详情抽屉 */
+.m-detail-drawer .ant-drawer-body {
+  padding: 12px;
+}
+
+.m-detail-content .ant-descriptions {
+  margin-bottom: 0;
+}
+
+.m-detail-content .ant-divider {
+  margin: 12px 0 8px;
+}

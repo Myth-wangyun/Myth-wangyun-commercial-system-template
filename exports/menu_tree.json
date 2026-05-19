@@ -1,0 +1,578 @@
+{
+  "generatedAt": "2026-02-09T09:18:28.819Z",
+  "sourceFiles": {
+    "menuItems": "frontend/config/ui/menuItems.tsx",
+    "routes": "frontend/config/router/routes.ts"
+  },
+  "menus": [
+    {
+      "key": "management-center",
+      "label": "管理中心",
+      "path": "",
+      "children": [
+        {
+          "key": "mgmt-academic-merged",
+          "label": "学术部",
+          "department": "academic",
+          "path": "",
+          "children": [
+            {
+              "key": "mgmt-academic-core-business-all",
+              "label": "核心业务数据汇总",
+              "routeKey": "academic-mgnt-core-business-summary-all",
+              "permissions": [
+                "academic.core_dashboard.view"
+              ],
+              "requiredPositions": [
+                "董事长",
+                "学术总监"
+              ],
+              "path": "/academic-mgnt-core-business-summary-all",
+              "children": []
+            }
+          ]
+        },
+        {
+          "key": "mgmt-teaching-quality",
+          "label": "教质部",
+          "department": "teaching_quality",
+          "path": "",
+          "children": [
+            {
+              "key": "mgmt-tq-x1-all",
+              "label": "核心业务数据汇总",
+              "routeKey": "teaching-quality-mgnt-core-business-summary-all",
+              "path": "/teaching-quality-mgnt-core-business-summary-all",
+              "children": []
+            }
+          ]
+        },
+        {
+          "key": "mgmt-market",
+          "label": "市场部",
+          "department": "common",
+          "path": "",
+          "children": [
+            {
+              "key": "mgmt-market-01-core-data",
+              "label": "01.核心数据",
+              "department": "common",
+              "path": "",
+              "children": [
+                {
+                  "key": "mgmt-market-001-yearly-summary",
+                  "label": "核心业务(年度)汇总表",
+                  "routeKey": "market-yearly-summary",
+                  "department": "common",
+                  "path": "/market/yearly-summary",
+                  "children": []
+                }
+              ]
+            },
+            {
+              "key": "mgmt-market-02-online-promotion",
+              "label": "02.网推数据",
+              "department": "common",
+              "path": "",
+              "children": [
+                {
+                  "key": "mgmt-market-002-monthly-data",
+                  "label": "月度数据表",
+                  "routeKey": "market-monthly-data",
+                  "department": "common",
+                  "path": "/market/monthly-data",
+                  "children": []
+                },
+                {
+                  "key": "mgmt-market-003-online-stage-report",
+                  "label": "网推阶段业务汇报表",
+                  "routeKey": "market-online-promotion-stage-report",
+                  "department": "common",
+                  "path": "/market/online-promotion-stage-report",
+                  "children": []
+                },
+                {
+                  "key": "mgmt-market-010-monthly-business-progress",
+                  "label": "本月业务推进表",
+                  "routeKey": "market-monthly-business-progress",
+                  "department": "common",
+                  "path": "/market/monthly-business-progress",
+                  "children": []
+                },
+                {
+                  "key": "mgmt-market-005-sem-daily-data",
+                  "label": "SEM日度数据表",
+                  "routeKey": "market-sem-daily-data",
+                  "department": "common",
+                  "path": "/market/sem-daily-data",
+                  "children": []
+                },
+                {
+                  "key": "mgmt-market-006-online-partner-daily-data",
+                  "label": "网络合作伙伴日度数据表",
+                  "routeKey": "market-online-partner-daily-data",
+                  "department": "common",
+                  "path": "/market/online-partner-daily-data",
+                  "children": []
+                },
+                {
+                  "key": "mgmt-market-007-daily-reputation-data",
+                  "label": "口碑日度数据表",
+                  "routeKey": "market-daily-reputation-data",
+                  "department": "common",
+                  "path": "/market/daily-reputation-data",
+                  "children": []
+                },
+                {
+                  "key": "mgmt-market-020-free-promotion-daily-data",
+                  "label": "免费推广日度数据表",
+                  "routeKey": "market-free-promotion-daily-data",
+                  "department": "common",
+                  "path": "/market/free-promotion-daily-data",
+                  "children": []
+                }
+              ]
+            },
+            {
+              "key": "mgmt-market-03-newmedia-editing",
+              "label": "03.新媒体",
+              "department": "common",
+              "path": "",
+              "children": [
+                {
+                  "key": "mgmt-market-008-newmedia-edit-report",
+                  "label": "新媒体剪辑汇报表",
+                  "routeKey": "market-newmedia-edit-report",
+                  "department": "common",
+                  "path": "/market/newmedia-edit-report",
+                  "children": []
+                },
+                {
+                  "key": "mgmt-market-003-newmedia-stage-report",
+                  "label": "新媒体阶段业务汇报表",
+                  "routeKey": "market-newmedia-phase-report",
+                  "department": "common",
+                  "path": "/market/newmedia-phase-report",
+                  "children": []
+                },
+                {
+                  "key": "mgmt-market-004-newmedia-daily-data",
+                  "label": "新媒体日度数据表",
+                  "routeKey": "market-newmedia-daily-data",
+                  "department": "common",
+                  "path": "/market/newmedia-daily-data",
+                  "children": []
+                }
+              ]
+            },
+            {
+              "key": "mgmt-market-04-online-chat",
+              "label": "04.网聊数据",
+              "department": "common",
+              "path": "",
+              "children": [
+                {
+                  "key": "mgmt-market-009-network-consultant-report",
+                  "label": "网络咨询师汇报表",
+                  "routeKey": "market-network-consultant-report",
+                  "department": "common",
+                  "path": "/market/network-consultant-report",
+                  "children": []
+                }
+              ]
+            },
+            {
+              "key": "mgmt-market-05-management-data",
+              "label": "05.管理数据",
+              "department": "common",
+              "path": "",
+              "children": [
+                {
+                  "key": "mgmt-market-011-staff-function-analysis",
+                  "label": "全员功能分析",
+                  "routeKey": "market-staff-function-analysis",
+                  "department": "common",
+                  "path": "/market/staff-function-analysis",
+                  "children": []
+                },
+                {
+                  "key": "mgmt-market-012-network-plan",
+                  "label": "年度网络计划表",
+                  "routeKey": "market-network-plan",
+                  "department": "common",
+                  "path": "/market/network-plan",
+                  "children": []
+                },
+                {
+                  "key": "mgmt-market-013-monthly-detail-plan",
+                  "label": "月度详细计划",
+                  "routeKey": "market-monthly-detail-plan",
+                  "department": "common",
+                  "path": "/market/monthly-detail-plan",
+                  "children": []
+                },
+                {
+                  "key": "mgmt-market-016-partner-contacts",
+                  "label": "合作方联系信息",
+                  "routeKey": "market-partner-contacts",
+                  "department": "common",
+                  "path": "/market/partner-contacts",
+                  "children": []
+                },
+                {
+                  "key": "mgmt-market-017-employee-interview-records",
+                  "label": "员工访谈记录表",
+                  "routeKey": "market-employee-interview-records",
+                  "department": "common",
+                  "path": "/market/employee-interview-records",
+                  "children": []
+                },
+                {
+                  "key": "mgmt-market-018-meeting-record",
+                  "label": "会议记录表",
+                  "routeKey": "market-meeting-record",
+                  "department": "common",
+                  "path": "/market/meeting-record",
+                  "children": []
+                },
+                {
+                  "key": "mgmt-market-019-newmedia-account-sentiment",
+                  "label": "各校新媒体账号舆情登记表",
+                  "routeKey": "market-account-sentiment",
+                  "department": "common",
+                  "path": "/market/account-sentiment",
+                  "children": []
+                }
+              ]
+            },
+            {
+              "key": "mgmt-market-06-culture-training",
+              "label": "06.企业文化及培训",
+              "department": "common",
+              "path": "",
+              "children": [
+                {
+                  "key": "mgmt-market-015-training-summary",
+                  "label": "培训汇总表",
+                  "routeKey": "market-training-summary",
+                  "department": "common",
+                  "path": "/market/training-summary",
+                  "children": []
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "key": "mgmt-consulting",
+          "label": "咨询部",
+          "department": "common",
+          "path": "",
+          "children": [
+            {
+              "key": "mgmt-consulting-dashboard",
+              "label": "001管理中心咨询部核心业务数据汇总表",
+              "routeKey": "consult-mgnt-center-dashboard",
+              "path": "/consult/mgnt-center-dashboard",
+              "children": []
+            }
+          ]
+        },
+        {
+          "key": "mgmt-hr",
+          "label": "人资部",
+          "department": "common",
+          "path": "",
+          "children": [
+            {
+              "key": "mgmt-hr-dashboard",
+              "label": "集团人力资源数据看板",
+              "routeKey": "hr-group-dashboard",
+              "path": "/human-resources/group-dashboard",
+              "children": []
+            },
+            {
+              "key": "mgmt-hr-campus-level2-dashboard",
+              "label": "校区二级数据看板",
+              "routeKey": "hr-campus-level2-dashboard",
+              "path": "/human-resources/campus-level2-dashboard",
+              "children": []
+            },
+            {
+              "key": "mgmt-hr-campus-level3-dashboard",
+              "label": "校区三级数据看板",
+              "routeKey": "hr-campus-level3-dashboard",
+              "path": "/human-resources/campus-level3-dashboard",
+              "children": []
+            }
+          ]
+        },
+        {
+          "key": "mgmt-system-config",
+          "label": "配置中心",
+          "department": "common",
+          "path": "",
+          "children": [
+            {
+              "key": "mgmt-system-config-master",
+              "label": "校区/班级配置",
+              "routeKey": "system-config-master",
+              "path": "/system/config/master-data",
+              "children": []
+            },
+            {
+              "key": "mgmt-system-config-employee",
+              "label": "员工管理",
+              "routeKey": "system-config-employee",
+              "path": "/system/config/employee-manage",
+              "children": []
+            },
+            {
+              "key": "mgmt-system-config-media-source",
+              "label": "咨询配置",
+              "routeKey": "system-config-media-source",
+              "path": "/system/config/media-source",
+              "children": []
+            }
+          ]
+        },
+        {
+          "key": "mgmt-finance",
+          "label": "财务部",
+          "department": "common",
+          "path": "",
+          "children": []
+        }
+      ]
+    },
+    {
+      "key": "campus",
+      "label": "校区",
+      "path": "",
+      "children": [
+        {
+          "key": "campus-consulting",
+          "label": "咨询部",
+          "department": "common",
+          "path": "",
+          "children": [
+            {
+              "key": "campus-consulting-campus-core-data",
+              "label": "01.校区核心数据",
+              "path": "",
+              "children": [
+                {
+                  "key": "campus-consulting-campus-yearly-monthly",
+                  "label": "002校区-年月表-各媒体来源",
+                  "routeKey": "consult-campus-yearly-monthly-media",
+                  "path": "/consult/campus-yearly-monthly-media",
+                  "children": []
+                },
+                {
+                  "key": "campus-consulting-consultant-data-summary",
+                  "label": "003校区各咨询师数据汇总",
+                  "routeKey": "consult-consultant-data-summary-v3",
+                  "path": "/consult/campus-core-data/consultant-data-summary-v3",
+                  "children": []
+                },
+                {
+                  "key": "campus-consulting-population-data-summary",
+                  "label": "004校区各类人群数据汇总",
+                  "routeKey": "consult-population-data-summary",
+                  "path": "/consult/campus-basic-data/population-data-summary",
+                  "children": []
+                },
+                {
+                  "key": "campus-consulting-daily-consulting-summary",
+                  "label": "<DailyReportMenuLabel />",
+                  "routeKey": "consult-daily-consulting-summary-new",
+                  "path": "/consult/campus-core-data/daily-consulting-summary",
+                  "children": []
+                }
+              ]
+            },
+            {
+              "key": "campus-consulting-type-count-system",
+              "label": "咨询量录入系统",
+              "routeKey": "consult-type-count-system",
+              "path": "/consult/type-count-system",
+              "children": []
+            },
+            {
+              "key": "campus-consulting-my-consultations",
+              "label": "我的咨询量",
+              "routeKey": "consult-my-consultations",
+              "path": "/consult/my-consultations",
+              "children": []
+            },
+            {
+              "key": "campus-consulting-consultation-records",
+              "label": "咨询记录",
+              "routeKey": "consult-consultation-records",
+              "path": "/consult/consultation-records",
+              "children": []
+            },
+            {
+              "key": "campus-consulting-export-approval",
+              "label": "咨询量导出审批",
+              "routeKey": "consult-export-approval",
+              "permissions": [
+                "consult.export.approve"
+              ],
+              "path": "/consult/export-approval",
+              "children": []
+            },
+            {
+              "key": "campus-consulting-campus-basic-data",
+              "label": "02.校区基础数据",
+              "path": "",
+              "children": [
+                {
+                  "key": "campus-consulting-daily-consulting-register",
+                  "label": "006校区每日咨询量登记表",
+                  "routeKey": "consult-daily-consulting-register",
+                  "path": "/consult/campus-basic-data/daily-consulting-register",
+                  "children": []
+                }
+              ]
+            },
+            {
+              "key": "campus-consulting-mgmt-data",
+              "label": "03.管理数据",
+              "path": "",
+              "children": [
+                {
+                  "key": "campus-consulting-mgmt-data-financial-income",
+                  "label": "007财务收入和退费",
+                  "routeKey": "consult-mgnt-center-core-data",
+                  "path": "/consulting/mgnt-center-core-data",
+                  "children": []
+                },
+                {
+                  "key": "campus-consulting-mgmt-data-hr-basic",
+                  "label": "008前端人力资源基础表",
+                  "routeKey": "consult-hr-basic-table",
+                  "path": "/consulting/hr-basic-table",
+                  "children": []
+                },
+                {
+                  "key": "campus-consulting-mgmt-data-staff-function",
+                  "label": "009员工职数和功能分析",
+                  "routeKey": "consult-staff-function",
+                  "path": "/consulting/staff-function",
+                  "children": []
+                },
+                {
+                  "key": "campus-consulting-mgmt-data-staffing",
+                  "label": "010咨询和渠道职数",
+                  "routeKey": "consult-channel-staffing",
+                  "path": "/consulting/channel-staffing",
+                  "children": []
+                },
+                {
+                  "key": "campus-consulting-mgmt-data-entry-exit",
+                  "label": "011咨询部入职离职汇总表",
+                  "routeKey": "consult-entry-exit-summary",
+                  "path": "/consult/entry-exit-summary",
+                  "children": []
+                },
+                {
+                  "key": "campus-consulting-mgmt-data-interview",
+                  "label": "012咨询部员工访谈记录表",
+                  "routeKey": "consult-staff-interview",
+                  "path": "/consult/mgmt-data/staff-interview",
+                  "children": []
+                },
+                {
+                  "key": "campus-consulting-mgmt-data-meeting",
+                  "label": "013咨询部会议记录表",
+                  "routeKey": "consult-meeting-record",
+                  "path": "/consult/mgmt-data/meeting-record",
+                  "children": []
+                },
+                {
+                  "key": "campus-consulting-mgmt-data-phone-check",
+                  "label": "014电话标准化检查",
+                  "routeKey": "consult-mgmt-data-phone-check",
+                  "path": "/consult/mgmt-data/phone-check",
+                  "children": []
+                },
+                {
+                  "key": "campus-consulting-mgmt-data-face-to-face-check",
+                  "label": "015当面标准化检查",
+                  "routeKey": "consult-mgmt-data-face-to-face-check",
+                  "path": "/consult/mgmt-data/face-to-face-check",
+                  "children": []
+                }
+              ]
+            },
+            {
+              "key": "campus-consulting-culture-training",
+              "label": "04.企业文化及培训",
+              "path": "",
+              "children": [
+                {
+                  "key": "campus-consulting-culture-training-summary",
+                  "label": "016咨询部培训汇总表",
+                  "routeKey": "consult-culture-training-summary",
+                  "path": "/consult/culture-training/consulting-training-summary",
+                  "children": []
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "key": "campus-academic",
+          "label": "学术部",
+          "department": "academic",
+          "path": "",
+          "children": []
+        },
+        {
+          "key": "campus-employment",
+          "label": "就业",
+          "routeKey": "campus-employment-management",
+          "department": "common",
+          "path": "/employment/campus",
+          "children": []
+        },
+        {
+          "key": "campus-teaching-quality",
+          "label": "教质部",
+          "department": "teaching_quality",
+          "path": "",
+          "children": []
+        },
+        {
+          "key": "campus-finance",
+          "label": "财务部",
+          "department": "common",
+          "path": "",
+          "children": []
+        }
+      ]
+    },
+    {
+      "key": "test-menu",
+      "label": "测试",
+      "path": "",
+      "children": [
+        {
+          "key": "test-baidu-api",
+          "label": "百度API测试",
+          "routeKey": "baidu-api-test",
+          "path": "/test/baidu-api",
+          "children": []
+        },
+        {
+          "key": "test-campus-selector",
+          "label": "CampusSelector示例",
+          "routeKey": "campus-selector-demo",
+          "path": "/test/campus-selector-demo",
+          "children": []
+        }
+      ]
+    }
+  ]
+}
